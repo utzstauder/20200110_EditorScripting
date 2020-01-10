@@ -133,8 +133,8 @@ GameObject:
   - component: {fileID: 108180720}
   - component: {fileID: 108180719}
   m_Layer: 0
-  m_Name: Plane
-  m_TagString: Untagged
+  m_Name: GRID
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
