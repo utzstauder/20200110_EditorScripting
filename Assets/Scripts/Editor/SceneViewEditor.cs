@@ -7,14 +7,33 @@ using UnityEditor;
 public class SceneViewEditor : Editor
 {
     static Vector3 handlePosition;
+    static bool editorEnabled;
 
     static SceneViewEditor()
     {
         SceneView.duringSceneGui += SceneView_duringSceneGui;
     }
 
+    [MenuItem("Tools/Toggle Editor")]
+    static void ToggleEditor()
+    {
+        editorEnabled = !editorEnabled;
+    }
+
     private static void SceneView_duringSceneGui(SceneView sceneView)
     {
+        if (EditorApplication.isPlayingOrWillChangePlaymode
+            || EditorApplication.isCompiling
+            || !editorEnabled)
+        {
+            Handles.BeginGUI();
+            {
+                GUILayout.Label("Editor disabled. Enable via 'Tools/Toggle Editor'");
+            }
+            Handles.EndGUI();
+            return;
+        }
+
         // override default controls
         int controlID = GUIUtility.GetControlID(FocusType.Passive);
         HandleUtility.AddDefaultControl(controlID);
